@@ -12,7 +12,7 @@ var autoprefixer = require('autoprefixer');
 
 gulp.task('manageCSS', function () {
     del(['css/style.min.css', '!css']);
-    var styles = ['src/css/normalize.css', 'src/scss/style.scss'];
+    var styles = ['src/css/normalize.css', 'src/css/swiper-bundle.min.css', 'src/scss/style.scss'];
     return gulp
         .src(styles)
         .pipe(sourcemaps.init({
@@ -44,7 +44,7 @@ gulp.task('manageCSS', function () {
 
 gulp.task('manageJS', function () {
     del(['js/main.min.js', '!js']);
-    var scripts = [`src/js/*.js`];
+    var scripts = ['src/js/swiper-bundle.min.js', 'src/js/main.js'];
 
     var manageJS = gulp
         .src(scripts)

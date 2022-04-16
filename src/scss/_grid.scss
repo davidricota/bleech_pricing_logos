@@ -1,0 +1,39 @@
+*{
+position:relative;
+}
+
+section{
+	display: flex;
+	justify-content: center;
+	position:relative;
+}
+.grid {
+	display: grid;
+	grid-template-columns: repeat($columns, 1fr);
+	grid-gap: $gap;
+	gap: $gap;
+	width:100%;
+	padding: 0 24px;
+	box-sizing: border-box;
+	@each $breakpoint,
+	$width in $breakpoints {
+		@media (min-width: $width) {
+			max-width: $width;
+		}
+	}
+	&--full{
+		max-width: 100%;
+	}
+	&--no-padding{
+		padding:0;
+	}
+}
+
+@include create-selectors;
+
+@each $breakpoint,
+$width in $breakpoints {
+	@media (min-width: $width) {
+		@include create-selectors($breakpoint);
+	}
+}

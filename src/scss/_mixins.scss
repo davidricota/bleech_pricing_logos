@@ -1,0 +1,41 @@
+
+
+@mixin create-selectors($breakpoint: null) {
+	$infix: if($breakpoint==null, '', '-#{$breakpoint}');
+
+	@for $i from 1 through $columns {
+		.col#{$infix}-#{$i} {
+			grid-column-end: span $i;
+		}
+
+		.col-offset#{$infix}-#{$i} {
+			grid-column-start: $i + 1;
+		}
+
+		.row#{$infix}-#{$i} {
+			grid-row-end: span $i;
+		}
+
+		.row-offset#{$infix}-#{$i} {
+			grid-row-start: $i + 1;
+		}
+	}
+}
+
+@mixin media-breakpoint($breakpoint) {
+
+	// If the key exists in the map
+	@if map-has-key($breakpoints, $breakpoint) {
+
+		// Prints a media query based on the value
+		@media (min-width: map-get($breakpoints, $breakpoint)) {
+			@content;
+		}
+	}
+
+	// If the key doesn't exist in the map
+	@else {
+		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+		+"Available breakpoints are: #{map-keys($breakpoints)}.";
+	}
+}
